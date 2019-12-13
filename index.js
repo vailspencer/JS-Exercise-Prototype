@@ -39,9 +39,27 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function(food) {
+  if (this.stomach.length >= 10) {
+    return;
+  }
+  this.stomach.push(food)
+}
+
+Person.prototype.poop = function() {
+  this.stomach.length = 0;
+}
+
+Person.prototype.toString = function () {
+  return `${this.name}, ${this.age}`
+}
+
 
 /*
   TASK 2
@@ -57,8 +75,20 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesPerGallon  ) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+}
 
+Car.prototype.fill = function(gallons) {
+  this.tank += gallons;
+}
+
+Car.prototype.drive = function(distance){
+  this.odometer += distance;
+  this.tank -= distance / this.milesPerGallon
 }
 
 /*
@@ -68,18 +98,24 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+}
 
+Baby.prototype = Object.create (Person.prototype);
+Baby.prototype.play = function (favoriteToy) {
+  return `Playing with ${this.favoriteToy}`;
 }
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. WIndow/Global Object  when called at global object it points to the window its actually inside.
+  2. Implicit Binding this always points to the object that it is inside
+  3. New binding WHen its inside a constructor function it refers to the specific instance of an object that is created 
+  4. Explicit Binding Its explicit because you are specifically passing it "this" context into something else like a call()
 */
 
 
