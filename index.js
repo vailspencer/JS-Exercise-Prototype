@@ -112,10 +112,10 @@ Baby.prototype.play = function (favoriteToy) {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. WIndow/Global Object  when called at global object it points to the window its actually inside.
+  2. Implicit Binding this always points to the object that it is inside
+  3. New binding WHen its inside a constructor function it refers to the specific instance of an object that is created 
+  4. Explicit Binding Its explicit because you are specifically passing it "this" context into something else like a call()
 */
 
 
